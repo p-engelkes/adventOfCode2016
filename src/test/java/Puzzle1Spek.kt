@@ -21,12 +21,24 @@ class Puzzle1Spek : Spek({
     }
 
     given("a list of instructions") {
+        val startPosition = Position(0, 0, Facing.NORTH)
+
         it("should return the desired target position") {
             val expected = Position(2, 3, Facing.NORTH)
             val instructions = listOf<Instruction>(Instruction(Direction.RIGHT, 2), Instruction(Direction.LEFT, 3))
-            val startPosition = Position(0, 0, Facing.NORTH)
 
             assertEquals(expected, followInstructions(startPosition, instructions))
+        }
+
+        it("should return the position which was visited twice first") {
+            val expected = Position(4, 0, Facing.NORTH)
+            val instructions = listOf<Instruction>(
+                    Instruction(Direction.RIGHT, 8),
+                    Instruction(Direction.RIGHT, 4),
+                    Instruction(Direction.RIGHT, 4),
+                    Instruction(Direction.RIGHT, 8)
+            )
+            assertEquals(expected, followInstructionsAndReturnFirstVisitedPositionTwice(startPosition, instructions))
         }
     }
 
