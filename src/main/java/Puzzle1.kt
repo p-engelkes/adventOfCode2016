@@ -6,7 +6,7 @@ fun main(args: Array<String>) {
     var startPosition = Position(1, 1)
     InputReader.getInput("Puzzle1.txt").forEach {
         it.forEach {
-            startPosition = move(startPosition, Moves.getByString(it))
+            startPosition = move(startPosition, Moves.getByChar(it))
         }
 
         print(board[startPosition.y][startPosition.x])
@@ -32,13 +32,13 @@ val board = arrayOf(
 )
 
 enum class Moves(val x: Int, val y: Int) {
-    RIGHT(1, 0),
-    LEFT(-1, 0),
-    UP(0, -1),
-    DOWN(0, 1);
+    RIGHT(0, 1),
+    LEFT(0, -1),
+    UP(-1, 0),
+    DOWN(1, 0);
 
     companion object {
-        fun getByString(moveString: Char): Moves {
+        fun getByChar(moveString: Char): Moves {
             when (moveString) {
                 'R' -> return RIGHT
                 'L' -> return LEFT
@@ -59,6 +59,15 @@ data class Position(var x: Int, var y: Int) {
         }
 
         return false
+    }
+
+    fun isValidPuzzle2(): Boolean {
+        try {
+            return boardPuzzle2[y][x] != -1
+        } catch (exception: IndexOutOfBoundsException) {
+            return false
+        }
+
     }
 }
 
