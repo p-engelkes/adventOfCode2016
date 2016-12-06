@@ -13,17 +13,23 @@ fun main(args: Array<String>) {
     println(validTriangles)
 }
 
-class Triangle(triangle: String) {
+class Triangle {
     var a: Int
     var b: Int
     var c: Int
 
-    init {
+    constructor(triangle: String) {
         val triangleWithEmptyStrings = triangle.split(" ")
         val triangleSides = triangleWithEmptyStrings.filter { !it.isEmpty() }
         this.a = Integer.valueOf(triangleSides[0].trim())
         this.b = Integer.valueOf(triangleSides[1].trim())
         this.c = Integer.valueOf(triangleSides[2].trim())
+    }
+
+    constructor(a: Int, b: Int, c: Int) {
+        this.a = a
+        this.b = b
+        this.c = c
     }
 
     fun isValid(): Boolean {
